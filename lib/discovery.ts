@@ -24,8 +24,8 @@ let mqttClient: MqttClient;
 const onStateChange = async (state: string) => {
   switch (state) {
     case 'poweredOn': {
+      log.info('Starting BLE scanning.');
       await new Promise((resolve, reject) => noble.startScanning([], true, (error) => error ? reject(error) : resolve()));
-      log.info('Started BLE scanning.');
       return;
     }
 
@@ -72,7 +72,7 @@ const sendEspruinoDataIfPresent = async (deviceId: string, code: string, data: B
     return;
   }
 
-  const dataAscii = data.slice(2).toString('ascii');
+  const dataAscii = data.toString('ascii');
 
   try {
     const dataJson = json5.parse(dataAscii);
