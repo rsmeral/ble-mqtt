@@ -2,7 +2,8 @@
   "name": "ble-mqtt-node",
   "version": "0.1",
   "description": "Forwards BLE advertisements to MQTT",
-  "main": "index.js",
+  "main": "build/index.js",
+  "bin": "build/index.js",
   "author": "Gordon Williams (gw@pur3.co.uk), Ron Smeral",
   "license": "MPL-2.0",
   "dependencies": {

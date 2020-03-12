@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import * as discovery from './lib/discovery';
 import {loadConfigFromFile} from './lib/config';
 import {connect} from './lib/mqtt';
