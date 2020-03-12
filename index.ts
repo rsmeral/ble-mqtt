@@ -3,9 +3,13 @@ import {loadConfigFromFile} from './lib/config';
 import {connect} from './lib/mqtt';
 
 const main = async () => {
-  const config = await loadConfigFromFile();
-  const mqttClient = await connect(config.mqttBrokerUrl, config.mqttOptions);
-  discovery.start(config, mqttClient);
+  try {
+    const config = await loadConfigFromFile();
+    const mqttClient = await connect(config.mqttBrokerUrl, config.mqttOptions);
+    discovery.start(config, mqttClient);
+  } catch (e) {
+    process.exit(1);
+  }
 }
 
 main();
