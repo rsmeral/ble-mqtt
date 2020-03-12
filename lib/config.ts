@@ -43,7 +43,7 @@ const configSchema = Joi.object<Config>({
     username: Joi.string().required(),
     password: Joi.string()
   })
-});
+}).unknown(true);
 
 const defaults: OptionalConfig = {
   knownDevices: {},
@@ -70,6 +70,7 @@ export const loadConfigFromFile = async (fileName = CONFIG_FILENAME): Promise<Co
   const {error, value} = configSchema.validate(configObject);
 
   if (error) {
+    log.error(`Error while reading config:`);
     log.error(error.annotate());
     throw error;
   }
