@@ -1,10 +1,9 @@
 {
-  "name": "espruinohub-mini",
-  "version": "0.0.1",
+  "name": "ble-mqtt-node",
+  "version": "0.1",
   "description": "Forwards BLE advertisements to MQTT",
   "main": "index.js",
-  "scripts": {},
-  "author": "Gordon Williams (gw@pur3.co.uk)",
+  "author": "Gordon Williams (gw@pur3.co.uk), Ron Smeral",
   "license": "MPL-2.0",
   "dependencies": {
     "@abandonware/noble": "^1.9.2-3",
