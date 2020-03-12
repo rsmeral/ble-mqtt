@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "outDir": "./build",
+    "target": "ES2019",
+    "lib": ["es2019"],
+    "noImplicitAny": true,
+    "module": "CommonJS",
+    "esModuleInterop": true
+  },
+  "include": [
+    "index.ts",
+    "lib/*"
+  ]
+}
