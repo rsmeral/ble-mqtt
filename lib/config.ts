@@ -4,8 +4,6 @@ import Joi from '@hapi/joi';
 import {logger} from './logger';
 import {MqttOptions} from './mqtt';
 
-var CONFIG_FILENAME = 'config.json';
-
 const log = logger('Config');
 
 let config: Config;
@@ -63,7 +61,7 @@ const ensureFileExists = async (fileName: string): Promise<void> => {
   }
 }
 
-export const loadConfigFromFile = async (fileName = CONFIG_FILENAME): Promise<Config> => {
+export const loadConfigFromFile = async (fileName: string): Promise<Config> => {
   await ensureFileExists(fileName);
   const json = await fs.readFile(fileName, 'utf-8');
   const configObject = JSON.parse(json);
