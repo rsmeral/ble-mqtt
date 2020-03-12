@@ -1,19 +1,19 @@
 {
-  "// If a device's address is here, it'll be given a human-readable name":0,
-  "knownDevices" : {
-    "c0:52:3f:50:42:c9" : "office",
-    "fc:a6:c6:04:db:79" : "hall_down",
-    "cf:71:de:4d:f8:48" : "hall_up"
+  "// If a device's address is here, it'll be given a human-readable name": 0,
+  "knownDevices": {
+    "c0:52:3f:50:42:c9": "office",
+    "fc:a6:c6:04:db:79": "hall_down",
+    "cf:71:de:4d:f8:48": "hall_up"
   },
 
-  "// Set this to true to only publish MQTT messages for known devices":0,
+  "// Set this to true to only publish MQTT messages for known devices": 0,
   "onlyKnownDevices": false,
 
-  "// How many seconds to wait for a packet before considering BLE connection":0,
-  "// broken and exiting. Higher values are useful with slowly advertising sensors.":0,
-  "// Setting a value of 0 disables the exit/restart.":0,
+  "// How many seconds to wait for a packet before considering BLE connection": 0,
+  "// broken and exiting. Higher values are useful with slowly advertising sensors.": 0,
+  "// Setting a value of 0 disables the exit/restart.": 0,
   "bleTimeout": 20,
-
+  
   "mqttBrokerUrl": "mqtt://localhost",
   "//mqttOptions": {
     "username": "user",
