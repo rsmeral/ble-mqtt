@@ -74,9 +74,9 @@
   resolved "https://registry.yarnpkg.com/@types/json5/-/json5-0.0.30.tgz#44cb52f32a809734ca562e685c6473b5754a7818"
   integrity sha512-sqm9g7mHlPY/43fcSNrCYfOeX9zkTTK+euO5E6+CVijSMm5tTjkVdwdqRkY3ljjIAf8679vps5jKUoJBCLsMDA==
 
-"@types/node@12":
+"@types/node@^12":
   version "12.12.29"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-12.12.29.tgz#46275f028b4e463b9ac5fefc1d08bc66cc193f25"
+  resolved "https://registry.npmjs.org/@types/node/-/node-12.12.29.tgz#46275f028b4e463b9ac5fefc1d08bc66cc193f25"
   integrity sha512-yo8Qz0ygADGFptISDj3pOC9wXfln/5pQaN/ysDIzOaAWXt73cNHmtEC8zSO2Y+kse/txmwIAJzkYZ5fooaS5DQ==
 
 abbrev@1:

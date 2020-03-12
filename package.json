@@ -18,5 +18,9 @@
     "@types/node": "^12",
     "ts-node": "^8.6.2",
     "typescript": "^3.8.3"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "yarn ts-node index"
   }
 }
