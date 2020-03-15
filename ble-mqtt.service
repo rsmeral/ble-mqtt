@@ -1,0 +1,15 @@
+[Unit]
+Description=ble-mqtt
+After=docker.service
+Wants=network-online.target docker.socket
+Requires=docker.socket
+
+[Service]
+Restart=always
+RestartSec=30
+ExecStartPre=docker run -d --rm --name ble-mqtt --net=host --device /dev/ttyAMA0 -v /etc/ble-mqtt:/etc/ble-mqtt ble-mqtt:latest
+ExecStart=/usr/bin/docker start -a ble-mqtt
+ExecStop=/usr/bin/docker stop -t 10 ble-mqtt
+
+[Install]
+WantedBy=multi-user.target
