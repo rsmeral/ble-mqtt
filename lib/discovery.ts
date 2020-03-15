@@ -11,7 +11,6 @@
 
 import noble, {Peripheral, Advertisement} from '@abandonware/noble';
 import json5 from 'json5';
-import {promisify} from 'util';
 
 import {logger} from './logger';
 import {Config} from './config';
