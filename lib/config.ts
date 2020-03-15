@@ -66,11 +66,11 @@ const ensureFileExists = async (fileName: string): Promise<void> => {
     await fs.stat(fileName);
   } catch (e) {
     if (e.code === 'ENOENT') {
-      log.error(`File '${fileName}' does not exist.`)
+      log.error(`File '${fileName}' does not exist.`);
       throw new Error(`File '${fileName}' does not exist.`);
     }
   }
-}
+};
 
 export const loadConfigFromFile = async (fileName: string): Promise<Config> => {
   await ensureFileExists(fileName);
@@ -87,7 +87,7 @@ export const loadConfigFromFile = async (fileName: string): Promise<Config> => {
   config = Object.assign(defaults, value);
   log.debug(`Loaded config from ${fileName}`);
   return config;
-}
+};
 
 export const getConfig = (): Config => {
   if (!config) {
@@ -95,7 +95,7 @@ export const getConfig = (): Config => {
   }
 
   return config;
-}
+};
 
 export const getConfigValue = <P extends keyof Config>(key: P): Config[P] =>
   getConfig()[key];

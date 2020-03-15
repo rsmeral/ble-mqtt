@@ -23,7 +23,7 @@ const log = logger('Main');
 
 let mqttClient: MqttClient;
 
-const terminationHandler = async () => {
+const terminationHandler = async (): Promise<void> => {
   try {
     await discovery.stop();
     await mqttClient.disconnect();
@@ -32,9 +32,9 @@ const terminationHandler = async () => {
     log.error(e.message);
     process.exit(1);
   }
-}
+};
 
-const main = async () => {
+const main = async (): Promise<void> => {
   const parsedArgs = parseArgs(process.argv.slice(2));
   const configFilePath = parsedArgs.c || DEFAULT_CONFIG_PATH;
 
@@ -47,6 +47,6 @@ const main = async () => {
   } catch (e) {
     process.exit(1);
   }
-}
+};
 
 main();

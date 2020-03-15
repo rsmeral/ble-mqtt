@@ -23,8 +23,9 @@ const log = logger('MQTT');
 let mqttClient: MqttClient;
 
 export type MqttClient = {
-  send: (topic: string, message: any) => Promise<void>,
-  disconnect: () => Promise<void>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  send: (topic: string, message: any) => Promise<void>;
+  disconnect: () => Promise<void>;
 }
 
 export const connect = async (brokerUrl: string, options?: Partial<MqttOptions>): Promise<MqttClient> => {
@@ -39,25 +40,26 @@ export const connect = async (brokerUrl: string, options?: Partial<MqttOptions>)
     log.info(`Connected to ${brokerUrl}`);
   });
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const send = async (topic: string, message: any): Promise<void> => {
     const msg = ['string', 'buffer'].includes(typeof message)
       ? message
       : JSON.stringify(message);
     await client.publish(topic, msg);
-  }
+  };
 
   const disconnect = async (): Promise<void> => {
     await client.end();
-    log.info('Disconnected.')
-  }
+    log.info('Disconnected.');
+  };
 
   mqttClient = {
     send,
     disconnect
-  }
+  };
 
   return mqttClient;
-}
+};
 
 export const getMqttClient = (): MqttClient => {
   if (!mqttClient) {
@@ -65,4 +67,4 @@ export const getMqttClient = (): MqttClient => {
   }
 
   return mqttClient;
-}
+};

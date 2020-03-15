@@ -8,13 +8,21 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 type LogFunction = (message?: any, ...optionalParams: any[]) => void;
 
-const wrap = (namespace: string, logFunction: LogFunction): LogFunction =>
-  (args: any[]) => logFunction(`[${namespace}]`, args);
+type Logger = {
+  debug: LogFunction;
+  info: LogFunction;
+  error: LogFunction;
+  warn: LogFunction;
+};
 
-export const logger = (ns: string) => ({
+const wrap = (namespace: string, logFunction: LogFunction): LogFunction =>
+  (args: any[]): void => logFunction(`[${namespace}]`, args);
+
+export const logger = (ns: string): Logger => ({
   debug: wrap(ns, console.debug),
   info: wrap(ns, console.info),
   error: wrap(ns, console.error),

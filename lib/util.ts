@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-export const withoutEmpty = (obj: object) =>
+export const withoutEmpty = (obj: object): object =>
   Object.fromEntries(
-    Object.entries(obj).filter(([_key, value]) => Boolean(value))
+    Object.entries(obj).filter(([, value]) => Boolean(value))
   );

@@ -38,7 +38,7 @@ const serviceHandlers: Record<string, ServiceDecoder> = {
 
     return {
       temp
-    }
+    };
   },
 
   // Battery percent
@@ -99,7 +99,7 @@ const serviceHandlers: Record<string, ServiceDecoder> = {
   })
 };
 
-export const getReadableAttributeName = (uuid: string) =>
+export const getReadableAttributeName = (uuid: string): string =>
   serviceNames[uuid] || uuid;
 
 export const decodeAttributeData = function (uuid: string, data: Buffer): object | Buffer {

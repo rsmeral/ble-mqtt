@@ -31,11 +31,13 @@ const log = logger('Discovery');
 let config: Config;
 let mqttClient: MqttClient;
 
-const onStateChange = async (state: string) => {
+const onStateChange = async (state: string): Promise<void> => {
   switch (state) {
     case 'poweredOn': {
       log.info('Starting BLE scanning.');
-      await new Promise((resolve, reject) => noble.startScanning([], true, (error) => error ? reject(error) : resolve()));
+      await new Promise((resolve, reject) =>
+        noble.startScanning([], true, (error) => error ? reject(error) : resolve())
+      );
       return;
     }
 
@@ -54,12 +56,14 @@ const getDeviceId = (peripheral: Peripheral): string => {
   const knownDeviceName = config.knownDevices[deviceAddress];
 
   return knownDeviceName || deviceAddress;
-}
+};
 
 const parseManufacturerData = (manufacturerData: Buffer): ManufacturerData => ({
+  // First two bytes is the manufacturer code (little-endian) 
+  // as per https://www.bluetooth.com/specifications/assigned-numbers/company-identifiers
   code: manufacturerData.slice(0, 2).reverse().toString('hex'),
   data: manufacturerData.slice(2)
-})
+});
 
 const sendPeripheralData = async (deviceId: string, peripheral: Peripheral): Promise<void> => {
   const mqttData = {
@@ -69,13 +73,13 @@ const sendPeripheralData = async (deviceId: string, peripheral: Peripheral): Pro
   };
 
   await mqttClient.send(`${BLE_ADVERTISE}/${deviceId}`, withoutEmpty(mqttData));
-}
+};
 
 const sendObjectEntries = async (topicPrefix: string, obj: object): Promise<void> => {
   for (const [key, value] of Object.entries(obj)) {
     await mqttClient.send(`${topicPrefix}/${key}`, value);
   }
-}
+};
 
 const sendEspruinoDataIfPresent = async (deviceId: string, code: string, data: Buffer): Promise<void> => {
   if (code !== ESPRUINO_MANUFACTURER_ID) {
@@ -95,15 +99,14 @@ const sendEspruinoDataIfPresent = async (deviceId: string, code: string, data: B
   } catch (e) {
     log.error(`Malformed JSON received in manufacturer data from ${deviceId}: ${dataAscii}`);
   }
-}
+};
 
 const sendManufacturerData = async (deviceId: string, {manufacturerData}: Advertisement): Promise<void> => {
-  // First two bytes is the manufacturer code (little-endian) as per https://www.bluetooth.com/specifications/assigned-numbers/company-identifiers
   const {code, data} = parseManufacturerData(manufacturerData);
 
   await mqttClient.send(`${BLE_ADVERTISE}/${deviceId}/manufacturer/${code}`, data.toString('hex'));
   await sendEspruinoDataIfPresent(deviceId, code, data);
-}
+};
 
 const sendServiceData = async (deviceId: string, {serviceData}: Advertisement): Promise<void> => {
   for (const {uuid, data} of serviceData) {
@@ -112,8 +115,8 @@ const sendServiceData = async (deviceId: string, {serviceData}: Advertisement): 
     const decodedAttributeData = decodeAttributeData(uuid, data);
 
     await sendObjectEntries(`${BLE_ADVERTISE}/${deviceId}`, decodedAttributeData);
-  };
-}
+  }
+};
 
 const onDiscovery = async (peripheral: Peripheral): Promise<void> => {
   if (config.onlyKnownDevices && !isKnownDevice(peripheral)) {
@@ -125,17 +128,17 @@ const onDiscovery = async (peripheral: Peripheral): Promise<void> => {
   await sendPeripheralData(deviceId, peripheral);
   await sendManufacturerData(deviceId, peripheral.advertisement);
   await sendServiceData(deviceId, peripheral.advertisement);
-}
+};
 
-const onScanStart = () => {
+const onScanStart = (): void => {
   log.info('BLE scanning started.');
-}
+};
 
-const onScanStop = () => {
+const onScanStop = (): void => {
   log.info('BLE scanning stopped.');
-}
+};
 
-export const start = (_config: Config, _mqttClient: MqttClient) => {
+export const start = (_config: Config, _mqttClient: MqttClient): void => {
   config = _config;
   mqttClient = _mqttClient;
 
