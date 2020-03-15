@@ -1,6 +1,6 @@
 {
   "name": "ble-mqtt-node",
-  "version": "0.1",
+  "version": "0.1.0",
   "description": "Forwards BLE advertisements to MQTT",
   "main": "build/index.js",
   "bin": "build/index.js",
@@ -14,7 +14,6 @@
     "json5": "^1.0.1",
     "minimist": "^1.2.4"
   },
-  "type": "module",
   "devDependencies": {
     "@types/hapi__joi": "^16.0.12",
     "@types/minimist": "^1.2.0",

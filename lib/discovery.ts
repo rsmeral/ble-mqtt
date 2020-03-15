@@ -135,6 +135,6 @@ export const start = (_config: Config, _mqttClient: MqttClient) => {
   noble.on('scanStop', onScanStop);
 };
 
-export const stop = async () => {
-  await mqttClient.disconnect();
+export const stop = async (): Promise<void> => {
+  await new Promise((resolve) => noble.stopScanning(resolve));
 };

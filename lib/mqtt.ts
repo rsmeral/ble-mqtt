@@ -35,7 +35,10 @@ export const connect = async (brokerUrl: string, options?: Partial<MqttOptions>)
     await client.publish(topic, msg);
   }
 
-  const disconnect = (): Promise<void> => client.end();
+  const disconnect = async (): Promise<void> => {
+    await client.end();
+    log.info('Disconnected.')
+  }
 
   mqttClient = {
     send,
@@ -47,7 +50,7 @@ export const connect = async (brokerUrl: string, options?: Partial<MqttOptions>)
 
 export const getMqttClient = (): MqttClient => {
   if (!mqttClient) {
-    throw new Error('MQTT client not connected');
+    throw new Error('MQTT client not connected.');
   }
 
   return mqttClient;
