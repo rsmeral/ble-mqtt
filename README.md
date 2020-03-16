@@ -22,7 +22,7 @@ docker run -d \
   --rm \
   --name ble-mqtt \
   --net=host \
-  --device /dev/ttyAMA0 \
+  --env NOBLE_HCI_DEVICE_ID=0 \
   -v /etc/ble-mqtt:/etc/ble-mqtt \
   ble-mqtt:latest
 ```

@@ -7,7 +7,7 @@ Requires=docker.socket
 [Service]
 Restart=always
 RestartSec=30
-ExecStartPre=docker run -d --rm --name ble-mqtt --net=host --device /dev/ttyAMA0 -v /etc/ble-mqtt:/etc/ble-mqtt ble-mqtt:latest
+ExecStartPre=docker run -d --rm --name ble-mqtt --net=host --env NOBLE_HCI_DEVICE_ID=0 -v /etc/ble-mqtt:/etc/ble-mqtt ble-mqtt:latest
 ExecStart=/usr/bin/docker start -a ble-mqtt
 ExecStop=/usr/bin/docker stop -t 10 ble-mqtt
 
