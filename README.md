@@ -14,7 +14,7 @@ ble-mqtt -c /path/to/config.json
 The below commands expect the `config.json` to be in `/etc/ble-mqtt`.
 
 ```
-docker build -t ble-mqtt:latest .
+docker build --no-cache -t ble-mqtt:latest .
 ```
 
 ```
