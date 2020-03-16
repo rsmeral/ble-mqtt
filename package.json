@@ -10,13 +10,13 @@
   "dependencies": {
     "@abandonware/noble": "^1.9.2-3",
     "@hapi/joi": "^17.1.0",
-    "@types/json5": "^0.0.30",
     "async-mqtt": "^2.5.0",
     "json5": "^1.0.1",
     "minimist": "^1.2.4"
   },
   "devDependencies": {
     "@types/hapi__joi": "^16.0.12",
+    "@types/json5": "^0.0.30",
     "@types/minimist": "^1.2.0",
     "@types/node": "^12",
     "@typescript-eslint/eslint-plugin": "^2.23.0",
