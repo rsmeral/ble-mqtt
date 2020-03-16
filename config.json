@@ -8,11 +8,6 @@
 
   "// Set this to true to only publish MQTT messages for known devices": 0,
   "onlyKnownDevices": false,
-
-  "// How many seconds to wait for a packet before considering BLE connection": 0,
-  "// broken and exiting. Higher values are useful with slowly advertising sensors.": 0,
-  "// Setting a value of 0 disables the exit/restart.": 0,
-  "bleTimeout": 20,
   
   "mqttBrokerUrl": "mqtt://localhost",
   "//mqttOptions": {

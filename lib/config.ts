@@ -31,12 +31,6 @@ type OptionalConfig = {
   /** Indicates whether discovery should only accept known devices */
   onlyKnownDevices: boolean;
 
-  /** 
-   * How many seconds to wait for a packet before considering BLE connection broken and exiting. 
-   * Higher values are useful with slowly advertising sensors. Setting a value of 0 disables the exit/restart. 
-   */
-  bleTimeout: number;
-
   /** MQTT username and password */
   mqttOptions: Partial<MqttOptions>;
 }
@@ -46,7 +40,6 @@ export type Config = MandatoryConfig & Partial<OptionalConfig>;
 const configSchema = Joi.object<Config>({
   knownDevices: Joi.object().pattern(/^(?:[0-9a-f]{2}:){5}[0-9a-f]{2}$/, Joi.string()),
   onlyKnownDevices: Joi.boolean(),
-  bleTimeout: Joi.number(),
   mqttBrokerUrl: Joi.string().required(),
   mqttOptions: Joi.object<MqttOptions>().keys({
     username: Joi.string().required(),
@@ -57,7 +50,6 @@ const configSchema = Joi.object<Config>({
 const defaults: OptionalConfig = {
   knownDevices: {},
   onlyKnownDevices: false,
-  bleTimeout: 10,
   mqttOptions: {}
 };
 
