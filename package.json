@@ -27,6 +27,7 @@
   },
   "scripts": {
     "build": "tsc",
+    "prepack": "tsc",
     "start": "yarn ts-node index"
   },
   "files": [
