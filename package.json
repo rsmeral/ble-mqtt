@@ -28,5 +28,11 @@
   "scripts": {
     "build": "tsc",
     "start": "yarn ts-node index"
-  }
+  },
+  "files": [
+    "build",
+    "LICENSE",
+    "README.md",
+    "package.json"
+  ]
 }
