@@ -25,6 +25,7 @@ type ManufacturerData = {
 
 const ESPRUINO_MANUFACTURER_ID = '0590';
 const BLE_ADVERTISE = '/ble/advertise';
+const SCAN_STOP_RESTART_DELAY_SECONDS = 5;
 
 const log = logger('Discovery');
 
@@ -135,7 +136,11 @@ const onScanStart = (): void => {
 };
 
 const onScanStop = (): void => {
-  log.info('BLE scanning stopped.');
+  log.info(`BLE scanning stopped. Will quit in ${SCAN_STOP_RESTART_DELAY_SECONDS} seconds.`);
+  setTimeout(async () => {
+    await mqttClient.disconnect();
+    process.exit(1);
+  }, SCAN_STOP_RESTART_DELAY_SECONDS * 1000);
 };
 
 export const start = (_config: Config, _mqttClient: MqttClient): void => {
